@@ -93,10 +93,10 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/waveo-293505:us-central1:polls-instance',
+            'HOST': '/cloudsql/waveo-293505:us-central1:db',
             'USER': 'web',
-            'PASSWORD': '4nH0!&gViF3YB#ywG',
-            'NAME': 'polls',
+            'PASSWORD': 'RsM63^lfVXiW&VpD6',
+            'NAME': 'django',
         }
     }
 else:
@@ -112,8 +112,8 @@ else:
             'HOST': '127.0.0.1',
             'PORT': '3306',
             'USER': 'web',
-            'PASSWORD': '4nH0!&gViF3YB#ywG',
-            'NAME': 'polls',
+            'PASSWORD': 'RsM63^lfVXiW&VpD6',
+            'NAME': 'django',
         }
     }
 # [END db_setup]
