@@ -43,6 +43,14 @@ td{
     height:2.5rem;
 }
 
+td.note{
+    border:none;
+}
+
+td.current{
+    background-color:#ab80b1;
+}
+
 td.note:hover{
     background-color:#b38cb8;
 }
