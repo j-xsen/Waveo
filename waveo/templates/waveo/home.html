@@ -2,6 +2,17 @@
 {% load static %}
 
 {% block content %}
+<script>
+function create(){
+    let sendstring = ""
+
+    for(let index in notes){
+        sendstring+=notes[index] + "-";
+    }
+    sendstring = sendstring.substring(0, sendstring.length - 1);
+    window.open('/create/' + sendstring,'_self');
+}
+</script>
 
 <div class="jumbotron">
     <h1>Create artwork with your music</h1>
@@ -25,6 +36,7 @@
 
 <div class="jumbotron">
     <button class="play-button" play=0><i class="fas fa-play"></i></button>
+    <button onclick="create()">CREATE</button>
 </div>
 
 {% endblock %}
