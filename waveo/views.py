@@ -80,8 +80,8 @@ def create(request, notes):
     name = notes + '--' + str(randrange(0, 50000))
     url = '/static/waveo/img/created/' + name + '.png'
 
-    if not os.path.exists('/static/waveo/img/created/'):
-        os.makedirs('/static/waveo/img/created/')
+    if not os.path.exists('waveo/static/waveo/img/created/'):
+        os.makedirs('waveo/static/waveo/img/created/')
 
     img.save('waveo' + url)
     return TemplateResponse(request, "waveo/create.html", {'url': url, 'name':name})
