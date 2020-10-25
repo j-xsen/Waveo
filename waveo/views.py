@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from PIL import Image, ImageDraw
 from random import randrange
+import os
 
 max_length = 12
 
@@ -78,7 +79,11 @@ def create(request, notes):
                 ignore[note] -= 1
     name = notes + '--' + str(randrange(0, 50000))
     url = '/static/waveo/img/created/' + name + '.png'
-    img.save('waveo/' + url)
+
+    if not os.path.exists('/static/waveo/img/created/'):
+        os.makedirs('/static/waveo/img/created/')
+
+    img.save('waveo' + url)
     return TemplateResponse(request, "waveo/create.html", {'url': url, 'name':name})
 
 
