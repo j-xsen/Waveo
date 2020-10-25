@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from PIL import Image, ImageDraw
 from random import randrange
-import os
+from google.cloud import storage
+import io
+
 
 max_length = 12
 
@@ -80,13 +82,18 @@ def create(request, notes):
     name = notes + '--' + str(randrange(0, 50000))
     url = '/static/waveo/img/created/' + name + '.png'
 
-    if not os.path.exists('waveo/static/waveo/img/created/'):
-        os.makedirs('waveo/static/waveo/img/created/')
+    storage_client = storage.Client()
+    bucket = storage_client.bucket("waveo")
+    blob = bucket.blob(name)
+    img_byte_array = io.BytesIO()
+    img.save(img_byte_array,format='png')
+    blob.upload_from_string(img_byte_array.getvalue(), content_type="image/jpeg")
 
-    img.save('waveo' + url)
-    return TemplateResponse(request, "waveo/create.html", {'url': url, 'name':name})
+    url = 'https://storage.cloud.google.com/waveo/' + name
+
+    return TemplateResponse(request, "waveo/create.html", {'url':url, 'name': name})
 
 
-def recall(request, url):
-    url = '/static/waveo/img/created/' + url + '.png'
+def recall(request, name):
+    url = 'https://storage.cloud.google.com/waveo/' + name
     return TemplateResponse(request, "waveo/create.html", {'url': url})
