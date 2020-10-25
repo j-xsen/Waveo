@@ -20,6 +20,10 @@ body,html{
     margin-top:.75rem;
 }
 
+.header>img:hover{
+    cursor:pointer;
+}
+
 .footer {
     height:5rem;
     width:100%;
@@ -36,15 +40,18 @@ table {
     width:75%;
     margin-left:12.5%;
     background-color:#c3a4c7;
+    border-radius:10px;
 }
 
 td{
     text-align:center;
     height:2.5rem;
+    cursor:default;
 }
 
 td.note{
     border:none;
+    cursor:pointer;
 }
 
 td.current{
@@ -64,4 +71,20 @@ td.note:hover{
     margin-top:1rem;
     padding:1rem;
     font-size:25pt;
+}
+
+img.created{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+button{
+    border-radius:10px;
+    border:0;
+    background-color:#693970;
+    color:white;
+    margin:1rem;
+    cursor:pointer;
 }
