@@ -89,11 +89,11 @@ def create(request, notes):
     img.save(img_byte_array,format='png')
     blob.upload_from_string(img_byte_array.getvalue(), content_type="image/jpeg")
 
-    url = 'https://storage.cloud.google.com/waveo/' + name
+    url = 'https://storage.googleapis.com/waveo/' + name
 
     return TemplateResponse(request, "waveo/create.html", {'url':url, 'name': name})
 
 
 def recall(request, name):
-    url = 'https://storage.cloud.google.com/waveo/' + name
+    url = 'https://storage.googleapis.com/waveo/' + name
     return TemplateResponse(request, "waveo/create.html", {'url': url})
