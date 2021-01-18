@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template.response import TemplateResponse
 from PIL import Image, ImageDraw
 from random import randrange
-from google.cloud import storage
+# from google.cloud import storage
 import io
 
 
@@ -80,18 +80,22 @@ def create(request, notes):
             else:
                 ignore[note] -= 1
     name = notes + '--' + str(randrange(0, 50000))
-    url = '/static/waveo/img/created/' + name + '.png'
 
-    storage_client = storage.Client()
-    bucket = storage_client.bucket("waveo")
-    blob = bucket.blob(name)
-    img_byte_array = io.BytesIO()
-    img.save(img_byte_array,format='png')
-    blob.upload_from_string(img_byte_array.getvalue(), content_type="image/jpeg")
+    # in production, you should change this
+    url = 'static/waveo/img/created/' + name + '.png'
+    img.save("waveo/" + url)
 
-    url = 'https://storage.googleapis.com/waveo/' + name
+    # Google Cloud code
+    # storage_client = storage.Client()
+    # bucket = storage_client.bucket("waveo")
+    # blob = bucket.blob(name)
+    # img_byte_array = io.BytesIO()
+    # img.save(img_byte_array,format='png')
+    # blob.upload_from_string(img_byte_array.getvalue(), content_type="image/jpeg")
+    #
+    # url = 'https://storage.googleapis.com/waveo/' + name
 
-    return TemplateResponse(request, "waveo/create.html", {'url':url, 'name': name})
+    return TemplateResponse(request, "waveo/create.html", {'url': url, 'name': name})
 
 
 def recall(request, name):
