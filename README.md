@@ -2,6 +2,7 @@ This is the Django app of Waveo.
 
 Created for DemonHacks 2020 - Winner of "Hack the Arts"
 https://devpost.com/software/waveo
+
 Video Demo: https://www.youtube.com/watch?v=mUGjUHDetPc
 
 How to run locally:
