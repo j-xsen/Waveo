@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from PIL import Image, ImageDraw
@@ -5,6 +7,7 @@ from random import randrange
 # from google.cloud import storage
 import io
 
+from WebProject import settings
 
 max_length = 12
 
@@ -82,8 +85,13 @@ def create(request, notes):
     name = notes + '--' + str(randrange(0, 50000))
 
     # in production, you should change this
-    url = 'static/waveo/img/created/' + name + '.png'
-    img.save("waveo/" + url)
+
+    output_dir = os.path.join(settings.MEDIA_ROOT, 'generated')
+    os.makedirs(output_dir, exist_ok=True)
+
+    saveloc = os.path.join(output_dir, name + '.png')
+    url = settings.MEDIA_URL + "/generated/" + name + ".png"
+    img.save(saveloc)
 
     # Google Cloud code
     # storage_client = storage.Client()
@@ -99,5 +107,5 @@ def create(request, notes):
 
 
 def recall(request, name):
-    url = 'https://storage.googleapis.com/waveo/' + name
+    url = settings.MEDIA_URL + "/generated/" + name + ".png"
     return TemplateResponse(request, "waveo/create.html", {'url': url})
